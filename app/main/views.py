@@ -9,5 +9,4 @@ from ..models import User
 
 @main.route('/', methods=['get', 'post'])
 def index():
-    form = NameForm()
-    return render_template('index.html', form=form)
+    return render_template('index.html')

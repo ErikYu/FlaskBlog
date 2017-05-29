@@ -2,5 +2,11 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block page_content %}
-{{ wtf.quick_form(form) }}
+<div class="page-header">
+    {% if current_user.is_authenticated %}
+    <p>hello, {{ current_user.name }}</p>
+    {% else %}
+    <p>stranger</p>
+    {% endif %}
+</div>
 {% endblock %}
