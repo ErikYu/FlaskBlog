@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{{ super() }}
+    <link rel="stylesheet" type="text/css" href="../../static/css/lightbox.css">
+<style type="text/css">
+    *{padding: 0;margin:0;}
+    #main{
+        position: relative;
+    }
+    .pin{
+        padding: 15px 0 0 15px;
+        float:left;
+    }
+    .box{
+        padding: 10px;
+        border:1px solid #ccc;
+        box-shadow: 0 0 6px #ccc;
+        border-radius: 5px;
+    }
+    .box img{
+        width:150px;
+        height:auto;
+    }
+
+    .example-image-link:hover{
+        background-color:#4ae;
+    }
+</style>
+{% endblock %}
+
+{% block page_content %}
+<div id="main">
+{% for source in sources %}
+    <div class="pin">
+        <div class="box">
+            <a class="example-image-link" href="{{ source }}" data-lightbox="example-set" data-title="The next image in the set is preloaded as you're viewing.">
+                <img class="example-image" src="{{ source }}">
+            </a>
+        </div>
+    </div>
+{% endfor %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script type="text/javascript" src="../../static/js/jsfile.js"></script>
+<script type="text/javascript" src="../../static/js/lightbox.js"></script>
+{% endblock %}

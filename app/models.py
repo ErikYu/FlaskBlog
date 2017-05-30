@@ -54,3 +54,11 @@ class User(UserMixin, db.Model):
 
     def __repr__(self):
         return 'User %r' % self.name
+
+
+class Picture(db.Model):
+    __tablename__ = 'pictures'
+    id = db.Column(db.Integer, primary_key=True)
+    description = db.Column(db.String(256))
+    source = db.Column(db.String(256), unique=True)
+
