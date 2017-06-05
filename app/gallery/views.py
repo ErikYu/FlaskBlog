@@ -18,7 +18,7 @@ def api_gallery_more():
 
 @gallery.route('/gallery')
 def gallery():
-    pictures = Picture.query.limit(25).all()
+    pictures = Picture.query.limit(10).all()
     sources = []
     for pic in pictures:
         sources.append('../static/image/gallery/'+pic.source)

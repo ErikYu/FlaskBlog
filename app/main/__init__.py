@@ -3,5 +3,11 @@
 from flask import Blueprint
 
 main = Blueprint('main', __name__)
-# 以下导入在main定义之后导入
+
 from . import views, errors
+from ..models import Permission
+
+
+@main.app_context_processor
+def inject_permissions():
+    return dict(Permission=Permission)

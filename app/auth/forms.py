@@ -13,7 +13,7 @@ class LoginForm(FlaskForm):
 
 class RegistrationForm(FlaskForm):
     email = StringField(u'注册邮箱', validators=[DataRequired(), Email(), Length(1, 64)])
-    username = StringField(u'用户名', validators=[DataRequired(), Length(1, 64), Regexp('^[a-zA-Z]*$', 0, u'用户名格式')])
+    username = StringField(u'用户名', validators=[DataRequired(), Length(1, 64)])
     password = PasswordField(u'请输入密码', validators=[DataRequired(), EqualTo('password2', message=u'两次密码输入必须一致')])
     password2 = PasswordField(u'再输入一次', validators=[DataRequired()])
     submit = SubmitField(u'注册')
