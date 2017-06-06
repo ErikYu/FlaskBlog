@@ -4,7 +4,8 @@ from . import login_manager
 from werkzeug.security import generate_password_hash, check_password_hash           # 使用werkzeug实现密码散列
 from flask_login import UserMixin, AnonymousUserMixin
 from datetime import datetime
-
+from markdown import markdown
+import bleach
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -112,3 +113,10 @@ class Post(db.Model):
     body = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    body_html = db.Column(db.Text)
+
+    @staticmethod
+    def on_change_body(target, value, oldvalue, initiator):
+        allowed_tags = ['a', 'abbr', 'acronym', 'b', 'blackquote', 'code', 'em', 'i', 'li', 'ol', 'pre', 'strong', 'ul', 'h1', 'h2', 'h3', 'p']
+        target.body_html = bleach.linkify(bleach.clean(markdown(value, output_format='html'), tags=allowed_tags, strip=True))
+db.event.listen(Post.body, 'set', Post.on_change_body)
